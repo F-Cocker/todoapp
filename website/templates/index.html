@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Style sheet is referenced for formatting-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <title>Todo App</title>
+</head>
+
+<body>
+    <div class="top">
+        <h1>To-Do List</h1>
+        <!--This is the form that creates a new todo based on the users input-->
+        <form action="/add" method="post">
+            <div>
+                <label>Add new task:</label>
+                <input type="text" name="task" placeholder="Task Description" maxlength="100" required>
+                <button type="submit">Add</button>
+            </div>
+        </form>
+        <!--This error message is only visible if the page was loaded with the "error" variable set-->
+        <!--This only occurs if the user tried ot input a duplicate entry-->
+        {% if error %}
+        <p class="error">Could not add task: Task already exists</p>
+        {% endif %}
+        <hr>
+    </div>
+    <!--A container is set to keep all the todo objects within a grid-->
+    <div class="container">
+    <!--The todo_list is iterated to generate a div for each separate todo-->
+    {% for todo in todo_list %}
+        <div class="todo_box">
+            <!--The todos are generated using the database-->
+            <h3>{{todo.task}}</h3> 
+            <p>Created - {{todo.date}}</p>
+            <!--This form is used to change the name of the specific todo, and is contained within its box-->
+            <form action="/edit/{{ todo.id }}" method="post">
+                <input type="text" name="edit" placeholder="Change task name">
+                <button type="submit">Edit</button>
+            </form>
+            <!--This checks whether it is marked complete or not, and informs the user of this. If compelted, the competion time is shown-->
+            <!--A button is provided to easily flip the todo from compelte to incomplete and vice versa-->
+            {% if todo.complete==False %}
+                <p>Incomplete</p>
+                <a href="/update/{{ todo.id }}"><button>Mark Complete</button></a>
+            {% else %}
+                <p>Completed - {{todo.completed_date}}</p>
+                <a href="/update/{{ todo.id }}"><button>Mark Incomplete</button></a>
+            {% endif %}
+            <!--The delete button-->
+            <a href="/delete/{{ todo.id }}"><button>Delete</button></a>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+
+</html>

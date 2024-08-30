@@ -1,0 +1,39 @@
+/* Background is set using gradient */
+body{
+    background-image: linear-gradient(rgb(81, 81, 255), rgb(126, 187, 207));
+    background-attachment:fixed;
+}
+/* The error message is set to display in red text */
+p.error{
+    color:rgb(199, 0, 0);
+}
+/* The upper section is giving a background and spacing. the background is mostly transparent to let the gradient come through */
+div.top{
+    background-color:rgba(255, 255, 255, 0.225);
+    max-width:60%;
+    margin:20px;
+    padding-right:20px;
+    padding-left:20px;
+    padding-top:5px;
+}
+/* The container div is set as a grid so that the todo items are properly spaced. */
+div.container{
+    padding-left:30px;
+    display:grid;
+    grid-template-columns: 280px 280px 280px;
+}
+/* Each todo box is given its own spacing and displayed as inline-blocks, i have given each a gradient and shadow for aesthetics */
+div.todo_box{
+    background-image: linear-gradient(to bottom right, rgb(252, 253, 209), aliceblue);
+    margin:5px;
+    width:250px;
+    display:inline-block;
+    padding:10px;
+    box-shadow: 5px 5px black;
+}
+/* h3 is used for the main text of each todo, i gave it word wrap to prevent it spilling out of the todo notes */
+h3{
+    word-wrap:break-word
+}
+
+
