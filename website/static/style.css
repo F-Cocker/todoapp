@@ -7,6 +7,9 @@ body{
 p.error{
     color:rgb(199, 0, 0);
 }
+p.message{
+    color:rgb(20, 115, 1);
+}
 /* The upper section is giving a background and spacing. the background is mostly transparent to let the gradient come through */
 div.top{
     background-color:rgba(255, 255, 255, 0.225);

@@ -14,7 +14,8 @@ def home():
     todo_list=Todo.query.all()
     #error message is requested, if the user was redireted here with no error, it will not dispaly
     error=request.args.get("error", None)
-    return render_template("index.html", todo_list=todo_list, error=error)
+    message=request.args.get("message",None)
+    return render_template("index.html", todo_list=todo_list, error=error, message=message)
 
 #the route for adding a new item to the todo list. the POST method is required as this is done via a form
 @my_view.route("/add", methods=["POST"])
@@ -35,7 +36,8 @@ def add():
     #commit is necessary to update the database
     db.session.commit()
     #the user is redirected back to the main page with the new todo added
-    return redirect(url_for("my_view.home"))
+    message="Task added successfully"
+    return redirect(url_for("my_view.home", message=message))
 
 #the update route flips the boolean value of "completed" back and forth
 @my_view.route("/update/<todo_id>")
@@ -53,7 +55,8 @@ def update(todo_id):
     #updated data is commited to database
     db.session.commit()
     #returned to main page with update now displayed
-    return redirect(url_for("my_view.home"))
+    message="Task updated"
+    return redirect(url_for("my_view.home", message=message))
 
 #the delete route removes the specified todo from the list, completely deleting it
 @my_view.route("/delete/<todo_id>")
@@ -63,7 +66,8 @@ def delete(todo_id):
     #the todo is deleted and committed
     db.session.delete(todo)
     db.session.commit()
-    return redirect(url_for("my_view.home"))
+    message="Task deleted"
+    return redirect(url_for("my_view.home", message=message))
 
 #edit changes the name of the todo to a new value set by the user
 @my_view.route("/edit/<todo_id>", methods=["POST"])
@@ -75,11 +79,12 @@ def edit(todo_id):
     for todo in todo_list:
         if todo.task==edit:
             #if the edit is a duplicate, the todo is not changed and the user is given an error
-            error="Could not add task: Task already exists"
+            error="Could not edit task: Task already exists"
             return redirect(url_for("my_view.home", error=error))
     #if the edit is not a duplicate, the todo is searched via ID
     todo=Todo.query.filter_by(id=todo_id).first()
     #todo.task is set to the users input with no other data changed, then commited to database
     todo.task=edit
     db.session.commit()
-    return redirect(url_for("my_view.home"))
+    message="Task edited"
+    return redirect(url_for("my_view.home", message=message))
