@@ -23,7 +23,7 @@
         <!--This error message is only visible if the page was loaded with the "error" variable set-->
         <!--This only occurs if the user tried ot input a duplicate entry-->
         {% if error %}
-        <p class="error">Could not add task: Task already exists</p>
+        <p class="error">{{error}}</p>
         {% endif %}
         <hr>
     </div>

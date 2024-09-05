@@ -12,7 +12,9 @@ my_view=Blueprint("my_view", __name__)
 @my_view.route("/")
 def home():
     todo_list=Todo.query.all()
-    return render_template("index.html", todo_list=todo_list)
+    #error message is requested, if the user was redireted here with no error, it will not dispaly
+    error=request.args.get("error", None)
+    return render_template("index.html", todo_list=todo_list, error=error)
 
 #the route for adding a new item to the todo list. the POST method is required as this is done via a form
 @my_view.route("/add", methods=["POST"])
@@ -25,7 +27,8 @@ def add():
     for todo in todo_list:
         if todo.task==task:
             #if any of the tasks are the same as the input, the user is returned to the page without adding a new task, with an error message
-            return render_template("index.html", todo_list=todo_list, error=True)
+            error="Could not add task: Task already exists"
+            return redirect(url_for("my_view.home", error=error))
     #if no duplicates are found, the new item is added to the list. only todo is based on user input, the other data is all generated automatically
     new_todo=Todo(task=task)
     db.session.add(new_todo)
@@ -72,7 +75,8 @@ def edit(todo_id):
     for todo in todo_list:
         if todo.task==edit:
             #if the edit is a duplicate, the todo is not changed and the user is given an error
-            return render_template("index.html", todo_list=todo_list, error=True)
+            error="Could not add task: Task already exists"
+            return redirect(url_for("my_view.home", error=error))
     #if the edit is not a duplicate, the todo is searched via ID
     todo=Todo.query.filter_by(id=todo_id).first()
     #todo.task is set to the users input with no other data changed, then commited to database
