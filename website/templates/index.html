@@ -37,7 +37,7 @@
             <p>Created - {{todo.date}}</p>
             <!--This form is used to change the name of the specific todo, and is contained within its box-->
             <form action="/edit/{{ todo.id }}" method="post">
-                <input type="text" name="edit" maxlength="100" placeholder="Change task name">
+                <input type="text" name="edit" maxlength="100" placeholder="Change task name" required>
                 <button type="submit">Edit</button>
             </form>
             <!--This checks whether it is marked complete or not, and informs the user of this. If compelted, the competion time is shown-->
