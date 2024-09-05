@@ -4,6 +4,7 @@ from website import create_app
 #This helps to separate the purposes of each file and make code more readable
 #The app file's only purpose is to run the function and launch the website
 
+app=create_app()
+
 if __name__=="__main__":
-    app=create_app()
     app.run(debug=True, port=8000)
