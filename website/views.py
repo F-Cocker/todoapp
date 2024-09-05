@@ -46,7 +46,7 @@ def update(todo_id):
     todo.complete=not todo.complete
     #if the boolean has been flipped from False to True, the todo.completed_date is updated from a blank space to the current time
     if todo.complete==True:
-        todo.completed_date=datetime.now().strftime("%H:%M %x")
+        todo.completed_date=datetime.now().strftime("%H:%M %d/%b/%y")
     #else, if it was flipped from True to False, the todo.completed_date is set back to blank
     else:
         todo.completed_date=""

@@ -10,6 +10,6 @@ class Todo(db.Model):
     #complete is a boolean as it is only ever going to be True or False, this makes it easy to toggle
     complete=db.Column(db.Boolean, default=False)
     #date is when the task was created, it is automatically generated using datetime as imported above
-    date=db.Column(db.String, default=datetime.now().strftime("%H:%M %x"))
+    date=db.Column(db.String, default=datetime.now().strftime("%H:%M %d/%b/%y"))
     #completed_date is set when the complete value is toggled to True. by default, it is blank
     completed_date=db.Column(db.String, default="")
