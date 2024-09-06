@@ -31,7 +31,7 @@ def add():
             error="Could not add task: Task already exists"
             return redirect(url_for("my_view.home", error=error))
     #if no duplicates are found, the new item is added to the list. only todo is based on user input, the other data is all generated automatically
-    new_todo=Todo(task=task)
+    new_todo=Todo(task=task, date=datetime.now().strftime("%H:%M %d/%b/%y"))
     db.session.add(new_todo)
     #commit is necessary to update the database
     db.session.commit()
