@@ -47,13 +47,13 @@
             <!--A button is provided to easily flip the todo from compelte to incomplete and vice versa-->
             {% if todo.complete==False %}
                 <p>Incomplete</p>
-                <a href="/update/{{ todo.id }}"><button>Mark Complete</button></a>
+                <a href="/update/{{ todo.id }}"><img src="{{ url_for('static',filename='completeicon.png')}}" title="Complete" alt="Complete" class="icon"></a>
             {% else %}
                 <p>Completed - {{todo.completed_date}}</p>
-                <a href="/update/{{ todo.id }}"><button>Mark Incomplete</button></a>
+                <a href="/update/{{ todo.id }}"><img src="{{ url_for('static',filename='incompleteicon.png')}}" title="Incomplete" alt="Incomplete" class="icon"></a>
             {% endif %}
             <!--The delete button-->
-            <a href="/delete/{{ todo.id }}"><button>Delete</button></a>
+            <a href="/delete/{{ todo.id }}"><img src="{{ url_for('static',filename='deleteicon.png')}}" title="Delete" alt="Delete" class="icon"></a>
         </div>
     {% endfor %}
     </div>
