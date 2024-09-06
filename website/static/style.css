@@ -3,7 +3,7 @@ body{
     background-image: linear-gradient(rgb(81, 81, 255), rgb(126, 187, 207));
     background-attachment:fixed;
 }
-/* The error message is set to display in red text */
+/* The error message is set to display in red text, other messages display in green*/
 p.error{
     color:rgb(199, 0, 0);
 }
@@ -38,13 +38,31 @@ div.todo_box{
     box-shadow: 5px 5px black;
     font-family:Garamond
 }
+/* The form in each todo is set to inline, but the input box within the form is set as a block. */
+/* This allows the edit button to sit inline with the other buttons, while keeping the input box separate */
+div.todo_box>form{
+    display:inline;
+}
+div.todo_box>form>input{
+    display:block;
+}
 /* h3 is used for the main text of each todo, i gave it word wrap to prevent it spilling out of the todo notes */
 h3{
     word-wrap:break-word
 }
+/* The buttons and the icons within them have different classes. The icon class is used to properly size the images */
+/* The iconbutton class is used to give the button itself proper spacing and appearance, including a change on hover */
 img.icon{
     max-width:30px;
     max-height:30px;
-    padding-right:20px;
-    padding-left:20px;
+}
+button.iconbutton{
+    background:none;
+    border:none;
+    margin-top:15px;
+    margin-right:19px;
+    margin-left:19px;
+}
+button.iconbutton:hover{
+    background-color:rgba(0, 255, 30, 0.224);
 }

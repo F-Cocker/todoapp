@@ -20,8 +20,8 @@
                 <button type="submit">Add</button>
             </div>
         </form>
-        <!--This error message is only visible if the page was loaded with the "error" variable set-->
-        <!--This only occurs if the user tried ot input a duplicate entry-->
+        <!--If a message variable is fed into the page, it will display here.-->
+        <!--They are checked separately as errors and normal messages have different formatting-->
         {% if error %}
         <p class="error">{{error}}</p>
         {% endif %}
@@ -38,23 +38,26 @@
             <!--The todos are generated using the database-->
             <h3>{{todo.task}}</h3> 
             <p>Created - {{todo.date}}</p>
+            <!--This checks whether it is marked complete or not, and informs the user of this. If compelted, the competion time is shown-->
+            {% if todo.complete==False %}
+                <p>Incomplete</p>
+            {% else %}
+                <p>Completed - {{todo.completed_date}}</p>
+            {% endif %}
             <!--This form is used to change the name of the specific todo, and is contained within its box-->
             <form action="/edit/{{ todo.id }}" method="post">
                 <input type="text" name="edit" maxlength="100" placeholder="Change task name" required>
-                <button type="submit">Edit</button>
+                <button type="submit" class="iconbutton"><img src="{{ url_for('static',filename='editicon.png')}}" title="Edit" alt="Edit" class="icon"></button>
             </form>
-            <!--This checks whether it is marked complete or not, and informs the user of this. If compelted, the competion time is shown-->
             <!--A button is provided to easily flip the todo from compelte to incomplete and vice versa-->
             {% if todo.complete==False %}
-                <p>Incomplete</p>
-                <a href="/update/{{ todo.id }}"><img src="{{ url_for('static',filename='completeicon.png')}}" title="Complete" alt="Complete" class="icon"></a>
+            <a href="/update/{{ todo.id }}"><button class="iconbutton"><img src="{{ url_for('static',filename='completeicon.png')}}" title="Complete" alt="Complete" class="icon"></button></a>
             {% else %}
-                <p>Completed - {{todo.completed_date}}</p>
-                <a href="/update/{{ todo.id }}"><img src="{{ url_for('static',filename='incompleteicon.png')}}" title="Incomplete" alt="Incomplete" class="icon"></a>
+            <a href="/update/{{ todo.id }}"><button class="iconbutton"><img src="{{ url_for('static',filename='incompleteicon.png')}}" title="Incomplete" alt="Incomplete" class="icon"></button></a>
             {% endif %}
-            <!--The delete button-->
-            <a href="/delete/{{ todo.id }}"><img src="{{ url_for('static',filename='deleteicon.png')}}" title="Delete" alt="Delete" class="icon"></a>
-        </div>
+            <!-- The delete button -->
+            <a href="/delete/{{ todo.id }}"><button class="iconbutton"><img src="{{ url_for('static',filename='deleteicon.png')}}" title="Delete" alt="Delete" class="icon"></button></a>
+            </div>
     {% endfor %}
     </div>
 </body>
