@@ -16,8 +16,8 @@
         <form action="/add" method="post">
             <div>
                 <label>Add new task:</label>
-                <input type="text" name="task" placeholder="Task Description" maxlength="100" required>
-                <button type="submit">Add</button>
+                <input type="text" name="task" placeholder="Task Name" maxlength="100" required>
+                <button type="submit" class="iconbutton"><img src="{{ url_for('static',filename='addicon.png')}}" title="Add" alt="Add" class="icon"></button>
             </div>
         </form>
         <!--If a message variable is fed into the page, it will display here.-->
@@ -37,12 +37,12 @@
         <div class="todo_box">
             <!--The todos are generated using the database-->
             <h3>{{todo.task}}</h3> 
-            <p>Created - {{todo.date}}</p>
+            <p>Created: {{todo.date}}</p>
             <!--This checks whether it is marked complete or not, and informs the user of this. If compelted, the competion time is shown-->
             {% if todo.complete==False %}
                 <p>Incomplete</p>
             {% else %}
-                <p>Completed - {{todo.completed_date}}</p>
+                <p>Completed: {{todo.completed_date}}</p>
             {% endif %}
             <!--This form is used to change the name of the specific todo, and is contained within its box-->
             <form action="/edit/{{ todo.id }}" method="post">

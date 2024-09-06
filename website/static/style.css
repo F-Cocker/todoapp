@@ -12,7 +12,7 @@ p.message{
 }
 /* The upper section is giving a background and spacing. the background is mostly transparent to let the gradient come through */
 div.top{
-    background-color:rgba(255, 255, 255, 0.225);
+    background-color:rgba(255, 255, 255, 0.608);
     max-width:825px;
     min-width:325px;
     margin:20px;
@@ -48,13 +48,14 @@ div.todo_box>form>input{
 }
 /* h3 is used for the main text of each todo, i gave it word wrap to prevent it spilling out of the todo notes */
 h3{
-    word-wrap:break-word
+    word-wrap:break-word;
 }
 /* The buttons and the icons within them have different classes. The icon class is used to properly size the images */
 /* The iconbutton class is used to give the button itself proper spacing and appearance, including a change on hover */
 img.icon{
     max-width:30px;
     max-height:30px;
+    padding-top:5px;
 }
 button.iconbutton{
     background:none;
@@ -64,5 +65,5 @@ button.iconbutton{
     margin-left:19px;
 }
 button.iconbutton:hover{
-    background-color:rgba(0, 255, 30, 0.224);
+    background-color:rgba(0, 242, 255, 0.224);
 }
